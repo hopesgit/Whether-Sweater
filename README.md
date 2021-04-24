@@ -4,9 +4,9 @@
 This is the Rails backend API for an imaginary frontend that aggregates weather data for a user who is planning a trip. The purpose of this app is to leverage two outside APIs to provide data that can be parsed and passed on to the frontend for user consumption.
 
 ## External APIs used
-[OpenWeather One Call API](https://openweathermap.org/api/one-call-api)
-[MapQuest Geocoding API](https://developer.mapquest.com/documentation/geocoding-api/)
-Mystery image service API
+- [OpenWeather One Call API](https://openweathermap.org/api/one-call-api)
+- [MapQuest Geocoding API](https://developer.mapquest.com/documentation/geocoding-api/)
+- [Mystery image service API]()
 
 ## Versioning
 This project uses semantic versioning. All endpoints, for the purposes of grading, will be preceded by "/api/v1/".

@@ -3,9 +3,9 @@ require 'rails_helper'
 describe MapsService, type: :class do
   describe 'class methods' do
     it 'fetch_weather' do
-      VCR.use_cassette('weather_in_denver') do
+      VCR.use_cassette('denver_coordinates') do
         location = "denver,co"
-        test = MapsService.fetch_weather(location)
+        test = MapsService.fetch_coordinates(location)
 
         expect(test[:info][:statuscode]).to eq(0)
         expect(test[:options][:maxResults]).to eq(1)

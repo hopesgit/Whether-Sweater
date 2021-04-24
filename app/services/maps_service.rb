@@ -1,5 +1,5 @@
 class MapsService
-  def self.fetch_weather(location)
+  def self.fetch_coordinates(location)
     response = conn.get('/geocoding/v1/address') do |request|
       request.params[:location] = location
       request.params[:maxResults] = 1

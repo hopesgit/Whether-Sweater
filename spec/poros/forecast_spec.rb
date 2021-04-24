@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Forecast, type: :class do
   before :each do
-    VCR.use_casette('weather_for_denver') do
+    VCR.use_cassette('weather_for_denver') do
       lat = 39.738453
       long = -104.984853
       weather = WeatherService.fetch_weather_for_location(lat, long)

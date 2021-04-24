@@ -34,3 +34,13 @@ You'll be able to view test status by running:
 Afterward, you'll be able to view a coverage by opening the `index.html` report in the `coverage` folder.
 
 Some API calls won't work without having API keys, so if you do decide to check these out for yourself, please make sure to get yourself API keys from the APIs listed under the `External APIs used` header. This app uses [Figaro](github.com/laserlemon/figaro) for local configurations.
+
+## Learning Goals
+
+- Expose an API that aggregates data from multiple external APIs
+- Expose an API that requires an authentication token
+- Expose an API for CRUD functionality
+- Determine completion criteria based on the needs of other developers
+- Research, select, and consume an API based on your needs as a developer
+
+- [Requirements to meet](https://backend.turing.edu/module3/projects/sweater_weather/requirements)

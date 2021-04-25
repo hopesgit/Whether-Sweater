@@ -15,7 +15,7 @@ Ruby version: 2.5.3
 Rails version: 5.2.5
 
 ## Endpoints
-This will be filled out as functionality is added.
+- get 'api/v1/forecast' - Requires "location" params - Returns current weather as well as 5-day forecast and 8-hour forecast
 
 ## Setup
 

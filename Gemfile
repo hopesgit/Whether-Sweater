@@ -9,6 +9,11 @@ gem 'puma', '~> 3.11'
 gem 'fast_jsonapi'
 gem 'figaro'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'faraday'
+
+group :development, :test do
+  gem 'pry'
+end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'

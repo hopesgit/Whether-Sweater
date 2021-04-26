@@ -30,6 +30,15 @@ describe 'As a registered user' do
         expect(parsed[:data][:attributes]).to_not have_key(:exposed_password)
         expect(parsed[:data][:attributes]).to_not have_key(:serious_data_risk)
       end
+
+      it 'should give me an error with incorrect information' do
+        post '/api/v1/sessions', params: {email: @email, password: "oops"}, as: :json
+        parsed = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to have_http_status(405)
+        expect(parsed).to have_key(:message)
+        expect(parsed[:message]).to eq("Credentials invalid or sent as params.")
+      end
     end
   end
 end

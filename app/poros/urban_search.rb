@@ -10,13 +10,16 @@ class UrbanSearch
   def compile_weather_data(weather_data)
     {
       summary: weather_data.current_weather[:conditions],
-      temperature: "#{weather.current_weather[:temperature]} F"
+      temperature: "#{weather_data.current_weather[:temperature]} F"
     }
   end
 
   def compile_salary_data(salary_data)
+    jobs = salary_data.map do |job|
+      Job.new(job)
+    end
     terms = ['Data Analyst', 'Data Scientist', 'Mobile Developer', 'QA Engineer', 'Software Engineer', 'Systems Administrator', 'Web Developer']
-    terms.map do |variable|
+    terms.map do |term|
 
     end
   end

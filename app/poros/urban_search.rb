@@ -15,6 +15,9 @@ class UrbanSearch
   end
 
   def compile_salary_data(salary_data)
-    
+    terms = ['Data Analyst', 'Data Scientist', 'Mobile Developer', 'QA Engineer', 'Software Engineer', 'Systems Administrator', 'Web Developer']
+    terms.map do |variable|
+
+    end
   end
 end

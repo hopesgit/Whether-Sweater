@@ -6,7 +6,7 @@ class Api::V1::SalariesController < ApplicationController
     response = conn.get("/api/urban_areas/#{ua_id}/salaries")
     response_parsed = JSON.parse(response.body, symbolize_names: true)
 
-    UrbanSearch.new(response_parsed)
+    UrbanSearch.new(response_parsed[:salaries])
     binding.pry
   end
 end

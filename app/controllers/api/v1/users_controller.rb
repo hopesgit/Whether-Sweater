@@ -16,7 +16,7 @@ class Api::V1::UsersController < ApplicationController
     if body == ""
       Hash.new
     else
-      JSON.parse(body, symbolize_headers: true)
+      JSON.parse(body, symbolize_names: true)
     end
   end
 end

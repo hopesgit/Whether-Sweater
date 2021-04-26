@@ -15,7 +15,8 @@ class Api::V1::SalariesController < ApplicationController
     forecast = Forecast.new(weather)
 
     urban = UrbanSearch.new(salaries_search[:salaries], forecast, params[:destination])
+    render json: SalariesSerializer.new(urban)
 
-    binding.pry
+    # binding.pry
   end
 end

@@ -18,9 +18,9 @@ describe 'When I send a get request to "/api/v1/salaries"' do
       expect(parsed[:data][:attributes][:destination]).to eq("chicago")
       expect(parsed[:data][:attributes]).to have_key(:forecast)
       expect(parsed[:data][:attributes][:forecast]).to have_key(:summary)
+      expect(parsed[:data][:attributes][:forecast][:summary]).to be_a(String)
       expect(parsed[:data][:attributes][:forecast]).to have_key(:temperature)
-      expect(parsed[:data][:attributes]).to have_key(:temperature)
-      expect(parsed[:data][:attributes][:temperature]).to be_a String
+      expect(parsed[:data][:attributes][:forecast][:temperature]).to be_a String
       expect(parsed[:data][:attributes]).to have_key(:salaries)
       expect(parsed[:data][:attributes][:salaries]).to be_an(Array)
       expect(parsed[:data][:attributes][:salaries][0]).to be_a(Hash)

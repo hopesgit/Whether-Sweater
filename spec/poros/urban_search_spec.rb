@@ -2,13 +2,7 @@ require 'rails_helper'
 
 describe UrbanSearch, type: :class do
   before do
-    VCR.use_cassette('weather_for_denver') do
-      weather = WeatherService.fetch_weather_for_location("denver,co")
-      forecast = Forecast.new(weather)
-      job_search = File.read('./spec/fixtures/chicago_salary_search.json')
-      parsed_salaries = JSON.parse(job_search, symbolize_names: true)
-      @urban = UrbanSearch.new(parsed_salaries, forecast, "denver")
-    end
+    @urban = SalariesFacade.find_salary_information("denver")
   end
 
   it 'destination' do
@@ -16,6 +10,16 @@ describe UrbanSearch, type: :class do
   end
 
   it 'forecast' do
+    expect(@urban.forecast[:summary]).to be_a String
+    expect(@urban.forecast[:temperature]).to be_a String
+  end
 
+  it 'salaries' do
+    salary_list = @urban.salaries
+    salary_list.each do |salary|
+      expect(salary.title).to be_a String
+      expect(salary.min).to be_a String
+      expect(salary.max).to be_a String
+    end
   end
 end

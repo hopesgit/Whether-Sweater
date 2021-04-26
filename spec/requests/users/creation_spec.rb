@@ -5,7 +5,7 @@ describe 'When I send a post request to "/api/v1/users"' do
     it 'should send back a response with user details if valid' do
       post '/api/v1/users', params: {email: "borkbork@dog.com", password: "bones", password_confirmation: "bones"}, as: :json
 
-      expect(response).to have_http_status(201)
+      expect(response).to have_http_status(200)
 
       parsed = JSON.parse(response.body, symbolize_names: true)
 
@@ -22,6 +22,19 @@ describe 'When I send a post request to "/api/v1/users"' do
       expect(parsed[:data][:attributes]).to_not have_key(:password_digest)
       expect(parsed[:data][:attributes][:email]).to eq("borkbork@dog.com")
       expect(parsed[:data][:attributes][:api_key]).to be_a(String)
+    end
+
+    # sad path
+
+    it 'should send an error if info is sent as params' do
+      post '/api/v1/users?email=borkbork@bork.com&password=bones&password_confirmation=bones'
+
+      expect(response).to have_http_status(405)
+      parsed = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed).to have_key(:message)
+      expect(parsed.keys.count).to eq(1)
+      expect(parsed[:message]).to eq("Error: Not all fields filled out or information sent incorrectly.")
     end
   end
 end

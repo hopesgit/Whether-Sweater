@@ -1,13 +1,22 @@
 class Api::V1::UsersController < ApplicationController
   def create
     create_params = read_body
-    user = User.create(create_params)
-    render json: UsersSerializer.new(user).serialized_json
+    user = User.new(create_params)
+    if user.save
+      render json: UsersSerializer.new(user).serialized_json
+    else
+      render json: {message: "Error: Not all fields filled out or information sent incorrectly."}, status: 405
+    end
   end
 
   private
 
   def read_body
-    JSON.parse(request.body.read, symbolize_headers: true)
+    body = request.body.read
+    if body == ""
+      Hash.new
+    else
+      JSON.parse(body, symbolize_headers: true)
+    end
   end
 end

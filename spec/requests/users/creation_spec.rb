@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'When I send a post request to "/api/v1/users"' do
   describe 'with user params in the json-formatted body' do
     it 'should send back a response with user details if valid' do
-      post '/api/v1/users', params: {}, body: {email: "borkbork@dog.com", password: "bones", password_confirmation: "bones"}.to_json, as: :json
+      post '/api/v1/users', params: {email: "borkbork@dog.com", password: "bones", password_confirmation: "bones"}, as: :json
 
       expect(response).to have_http_status(201)
 

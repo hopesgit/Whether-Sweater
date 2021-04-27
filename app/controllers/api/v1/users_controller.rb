@@ -8,15 +8,4 @@ class Api::V1::UsersController < ApplicationController
       render json: {message: "Error: Not all fields filled out or information sent incorrectly."}, status: 405
     end
   end
-
-  private
-
-  def read_body
-    body = request.body.read
-    if body == ""
-      Hash.new
-    else
-      JSON.parse(body, symbolize_headers: true)
-    end
-  end
 end

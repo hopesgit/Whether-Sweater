@@ -29,7 +29,7 @@ describe 'When I send a post request to "/api/v1/users"' do
     it 'should send an error if info is sent as params' do
       post '/api/v1/users?email=borkbork@bork.com&password=bones&password_confirmation=bones'
 
-      expect(response).to have_http_status(405)
+      expect(response).to have_http_status(400)
       parsed = JSON.parse(response.body, symbolize_names: true)
 
       expect(parsed).to have_key(:message)

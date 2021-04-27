@@ -37,7 +37,7 @@ describe 'As a registered user' do
         post '/api/v1/sessions', params: {email: @email, password: "oops"}, as: :json
         parsed = JSON.parse(response.body, symbolize_names: true)
 
-        expect(response).to have_http_status(405)
+        expect(response).to have_http_status(400)
         expect(parsed).to have_key(:message)
         expect(parsed[:message]).to eq("Credentials invalid or sent as params.")
       end
@@ -46,7 +46,7 @@ describe 'As a registered user' do
         post '/api/v1/sessions', params: {email: "hiyou@hello.com", password: @password}, as: :json
         parsed = JSON.parse(response.body, symbolize_names: true)
 
-        expect(response).to have_http_status(405)
+        expect(response).to have_http_status(400)
         expect(parsed).to have_key(:message)
         expect(parsed[:message]).to eq("Credentials invalid or sent as params.")
       end
@@ -55,7 +55,7 @@ describe 'As a registered user' do
         post "/api/v1/sessions?email=#{@email}&password=#{@password}"
         parsed = JSON.parse(response.body, symbolize_names: true)
 
-        expect(response).to have_http_status(405)
+        expect(response).to have_http_status(400)
         expect(parsed).to have_key(:message)
         expect(parsed[:message]).to eq("Credentials invalid or sent as params.")
       end

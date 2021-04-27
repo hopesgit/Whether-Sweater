@@ -3,7 +3,7 @@ class Forecast
 
   def initialize(data)
     @id = nil
-    @current_weather = compile_current_weather(data[:current], data[:timezone_offset])
+    @current_weather = CurrentWeather.new(data[:current], data[:timezone_offset])
     @daily_weather = compile_daily_weather(data[:daily].first(5), data[:timezone_offset])
     @hourly_weather = compile_hourly_weather(data[:hourly].first(8), data[:timezone_offset])
   end

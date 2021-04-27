@@ -8,6 +8,15 @@ class MapsService
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def self.fetch_directions(start_loc, end_loc)
+    response = conn.get('/directions/v2/route') do |request|
+      request.params[:from] = start_loc
+      request.params[:to] = end_loc
+    end
+
+    JSON.parse(response.body, symbolize_names: true)[:route]
+  end
+
   private
 
   def self.conn

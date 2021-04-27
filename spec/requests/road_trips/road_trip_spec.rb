@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'When a post request is sent to "/api/v1/road_trips"' do
+describe 'When a post request is sent to "/api/v1/road_trip"' do
   describe 'with the user_id, starting point, and destination in body' do
     before do
       @user = User.create(email: "hamhamham@ham.ham", password: "hamham")

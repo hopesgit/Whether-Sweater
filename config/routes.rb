@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/forecast', to: 'forecasts#show'
       post '/sessions', to: 'sessions#create'
+      post '/road_trips', to: 'roadtrips#create'
 
       resources :users, only: :create
     end

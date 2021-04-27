@@ -7,7 +7,7 @@ describe ForecastsFacade, type: :class do
 
       expect(test).to_not be_a(Hash)
       expect(test).to be_a(Forecast)
-      expect(test.current_weather).to be_a(Hash)
+      expect(test.current_weather).to be_a(CurrentWeather)
       expect(test.daily_weather).to be_an(Array)
       expect(test.hourly_weather).to be_an(Array)
     end

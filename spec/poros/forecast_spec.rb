@@ -12,17 +12,17 @@ describe Forecast, type: :class do
 
   it '#current_weather' do
     current = @forecast.current_weather
-    expect(current).to be_a Hash
-    expect(current[:datetime]).to be_a String
-    expect(current[:sunrise]).to be_a String
-    expect(current[:sunset]).to be_a String
-    expect(current[:temperature]).to be_a Float
-    expect(current[:feels_like]).to be_a Float
-    expect(current[:humidity]).to be_a Numeric
-    expect(current[:uvi]).to be_a Numeric
-    expect(current[:visibility]).to be_a Numeric
-    expect(current[:conditions]).to be_a String
-    expect(current[:icon]).to be_a String
+    expect(current).to be_a CurrentWeather
+    expect(current.datetime).to be_a String
+    expect(current.sunrise).to be_a String
+    expect(current.sunset).to be_a String
+    expect(current.temperature).to be_a Float
+    expect(current.feels_like).to be_a Float
+    expect(current.humidity).to be_a Numeric
+    expect(current.uvi).to be_a Numeric
+    expect(current.visibility).to be_a Numeric
+    expect(current.conditions).to be_a String
+    expect(current.icon).to be_a String
   end
 
   it '#daily_weather' do

@@ -51,5 +51,16 @@ describe 'When a post request is sent to "/api/v1/road_trip"' do
       expect(parsed[:data][:attributes][:weather_at_eta]).to_not have_key :temperature
       expect(parsed[:data][:attributes][:weather_at_eta]).to_not have_key :conditions
     end
+
+    it 'wont create a road trip without a valid api_key' do
+      post '/api/v1/road_trip', params: {origin: "Seattle, WA", destination: "Honolulu, HI", api_key: "lkfjhsaeljhfb"}, as: :json
+
+      parsed = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(401)
+
+      expect(parsed).to have_key(:message)
+      expect(parsed[:message]).to eq("API Key incorrect, not sent, or sent incorrectly")
+    end
   end
 end

@@ -6,6 +6,7 @@ This is the Rails backend API for an imaginary frontend that aggregates weather 
 ## External APIs used
 - [OpenWeather One Call API](https://openweathermap.org/api/one-call-api)
 - [MapQuest Geocoding API](https://developer.mapquest.com/documentation/geocoding-api/)
+- [MapQuest Directions API](https://developer.mapquest.com/documentation/directions-api/)
 - [Bing Image Search API](https://docs.microsoft.com/en-us/bing/search-apis/bing-image-search/reference/endpoints)
 
 ## Versioning

@@ -14,7 +14,7 @@ class RoadTrip
       return "impossible route"
     else
       hours = (time/3600).to_i
-      minutes = ((time % 3600) % 60)
+      minutes = ((time % 3600) / 60)
       return "#{hours} hours, #{minutes} minutes"
     end
   end

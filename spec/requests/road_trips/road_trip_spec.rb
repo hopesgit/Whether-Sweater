@@ -5,7 +5,7 @@ describe 'When a post request is sent to "/api/v1/road_trip"' do
     before do
       @user = User.create(email: "hamhamham@ham.ham", password: "hamham")
     end
-    it 'it should make a road trip and report the info' do
+    it 'it should make a road trip and report the info', :vcr do
       post '/api/v1/road_trip', params: {origin: "Dallas, TX", destination: "Denver, CO", api_key: @user.api_key}, as: :json
 
       parsed = JSON.parse(response.body, symbolize_names: true)
@@ -17,7 +17,7 @@ describe 'When a post request is sent to "/api/v1/road_trip"' do
       expect(parsed[:data]).to have_key :attributes
       expect(parsed[:data][:id]).to be nil
       expect(parsed[:data][:type]).to be_a String
-      expect(parsed[:data][:type]).to be("roadtrip")
+      expect(parsed[:data][:type]).to eq("roadtrip")
       expect(parsed[:data][:attributes]).to have_key :start_city
       expect(parsed[:data][:attributes]).to have_key :end_city
       expect(parsed[:data][:attributes]).to have_key :travel_time

@@ -6,7 +6,6 @@ describe RoadTrip do
       start_loc = "Denver, CO"
       end_loc = "Kansas City, KS"
       route = MapsService.fetch_directions(start_loc, end_loc)
-      # binding.pry
       coordinates = route[:locations][1][:latLng]
       weather = WeatherService.fetch_weather_for_location(coordinates[:lat], coordinates[:lng])
       forecast = Forecast.new(weather, 48)

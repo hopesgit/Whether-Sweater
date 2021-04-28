@@ -25,15 +25,7 @@ class Forecast
 
   def compile_daily_weather(data, offset)
     data.map do |day|
-      {
-        date: (Time.at(day[:dt]) + offset).strftime("%F"),
-        sunrise: (Time.at(day[:sunrise]) + offset).to_s,
-        sunset: (Time.at(day[:sunset]) + offset).to_s,
-        max_temp: day[:temp][:max],
-        min_temp: day[:temp][:min],
-        conditions: day[:weather][0][:description],
-        icon: day[:weather][0][:icon]
-      }
+      DailyWeather.new(day, offset)
     end
   end
 

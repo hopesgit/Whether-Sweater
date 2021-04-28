@@ -30,14 +30,14 @@ describe Forecast, type: :class do
     expect(daily.count).to eq(5)
     expect(daily).to be_an Array
     daily.each do |day|
-      expect(day).to be_a Hash
-      expect(day[:date]).to be_a String
-      expect(day[:sunrise]).to be_a String
-      expect(day[:sunset]).to be_a String
-      expect(day[:max_temp]).to be_a Float
-      expect(day[:min_temp]).to be_a Float
-      expect(day[:conditions]).to be_a String
-      expect(day[:icon]).to be_a String
+      expect(day).to be_a DailyWeather
+      expect(day.date).to be_a String
+      expect(day.sunrise).to be_a String
+      expect(day.sunset).to be_a String
+      expect(day.max_temp).to be_a Float
+      expect(day.min_temp).to be_a Float
+      expect(day.conditions).to be_a String
+      expect(day.icon).to be_a String
     end
   end
 

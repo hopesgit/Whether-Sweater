@@ -1,26 +1,29 @@
 # Whether, Sweater (Or, Sweater Weather!)
 
 ## Description
-This is the Rails backend API for an imaginary frontend that aggregates weather data for a user who is planning a trip. The purpose of this app is to leverage two outside APIs to provide data that can be parsed and passed on to the frontend for user consumption.
+This is the Rails backend API for an imaginary frontend that aggregates weather data for a user who is planning a trip. The purpose of this app is to leverage outside APIs to provide data that can be parsed and passed on to the frontend for user consumption.
 
 ## External APIs used
 - [OpenWeather One Call API](https://openweathermap.org/api/one-call-api)
 - [MapQuest Geocoding API](https://developer.mapquest.com/documentation/geocoding-api/)
-- [Mystery image service API]()
+- [Bing Image Search API](https://docs.microsoft.com/en-us/bing/search-apis/bing-image-search/reference/endpoints)
 
 ## Versioning
 This project uses semantic versioning. All endpoints, for the purposes of grading, will be preceded by "/api/v1/".
 
-Ruby version: 2.5.3
-Rails version: 5.2.5
+- Ruby version: 2.5.3
+- Rails version: 5.2.5
 
 ## Endpoints
-- get 'api/v1/forecast' - Requires "location" params - Returns current weather as well as 5-day forecast and 8-hour forecast
+- get '/api/v1/forecast' - Requires "location" params - Returns current weather as well as 5-day forecast and 8-hour forecast
+- post '/api/v1/users' - Requires that user's email, password, and password_confirmation be sent in a JSON body - Creates a user
+- post '/api/v1/sessions - Requires a registered user's email and password be sent in a JSON body - Returns user information for login purposes
+- post '/api/v1/road_trips - Requires a user's api key, as well as the starting and ending cities, be passed in a JSON body - Creates a road trip
 
 ## Setup
 
 As an extension, this app will be hosted on Heroku, if I  make it that far. You'll be able to send it commands at [Heroku]().
-In that case, continuous integration (and testing) will be taken care of thanks to [Travis CI].
+In that case, continuous integration (and testing) will be taken care of thanks to [Travis CI]().
 
 If you would like to download this app, clone it from GitHub and run these commands:
 

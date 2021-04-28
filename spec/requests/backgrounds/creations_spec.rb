@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'when I send a get request to "/api/v1/backgrounds"' do
   describe 'with the location params included' do
-    it 'steals an image from bing as we should' do
+    it 'steals an image from bing as we should', :vcr do
       get '/api/v1/backgrounds?location="denver,co"'
       parsed = JSON.parse(response.body, symbolize_names: true)
 

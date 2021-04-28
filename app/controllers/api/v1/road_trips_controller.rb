@@ -4,10 +4,11 @@ class Api::V1::RoadTripsController < ApplicationController
     render json: {message: "API Key incorrect, not sent, or sent incorrectly"}, status: 401 if !user
     if read_body[:origin] && read_body[:destination]
       route = MapsService.fetch_directions(read_body[:origin], read_body[:destination])
-      coordinates = route[:location][1][:latLng]
+      coordinates = route[:locations][1][:latLng]
       weather = WeatherService.fetch_weather_for_location(coordinates[:lat], coordinates[:lng])
-      forecast = Forecast.new(weather)
-      trip = RoadTrip.new()
+      forecast = Forecast.new(weather, 48)
+      trip = RoadTrip.new(read_body[:origin], read_body[:destination], route[:time], forecast.hourly_weather)
+      render json: RoadtripSerializer.new(trip).serialized_json
     else
       render json: {message: "Destination or origin information missing, incorrect, or sent improperly."}, status: 400
     end

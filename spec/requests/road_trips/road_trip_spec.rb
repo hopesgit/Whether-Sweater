@@ -31,6 +31,8 @@ describe 'When a post request is sent to "/api/v1/road_trip"' do
       expect(parsed[:data][:attributes][:weather_at_eta][:conditions]).to be_a String
     end
 
+    # sad path
+
     it 'cars dont swim', :vcr do
       post '/api/v1/road_trip', params: {origin: "Seattle, WA", destination: "Honolulu, HI", api_key: @user.api_key}, as: :json
 
@@ -71,6 +73,22 @@ describe 'When a post request is sent to "/api/v1/road_trip"' do
       expect(response).to have_http_status(400)
       expect(parsed).to have_key(:message)
       expect(parsed[:message]).to eq("Destination or origin information missing, incorrect, or sent improperly.")
+
+      post '/api/v1/road_trip', params: {destination: "Honolulu, HI", api_key: @user.api_key}, as: :json
+
+      parsed = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(400)
+      expect(parsed).to have_key(:message)
+      expect(parsed[:message]).to eq("Destination or origin information missing, incorrect, or sent improperly.")
+
+      post "/api/v1/road_trip?origin=Seattle, WA&destination=Honolulu, HI&api_key=#{@user.api_key}"
+
+      parsed = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(401)
+      expect(parsed).to have_key(:message)
+      expect(parsed[:message]).to eq("API Key incorrect, not sent, or sent incorrectly")
     end
   end
 end

@@ -62,5 +62,15 @@ describe 'When a post request is sent to "/api/v1/road_trip"' do
       expect(parsed).to have_key(:message)
       expect(parsed[:message]).to eq("API Key incorrect, not sent, or sent incorrectly")
     end
+
+    it 'wont create a road trip with missing or inappropriately-sent routing params' do
+      post '/api/v1/road_trip', params: {origin: "Seattle, WA", api_key: @user.api_key}, as: :json
+
+      parsed = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(400)
+      expect(parsed).to have_key(:message)
+      expect(parsed[:message]).to eq("Destination or origin information missing, incorrect, or sent improperly.")
+    end
   end
 end

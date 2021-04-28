@@ -46,11 +46,11 @@ describe Forecast, type: :class do
     expect(hourly.count).to eq(8)
     expect(hourly).to be_an Array
     hourly.each do |hour|
-      expect(hour).to be_a Hash
-      expect(hour[:time]).to be_a String
-      expect(hour[:temperature]).to be_a Float
-      expect(hour[:conditions]).to be_a String
-      expect(hour[:icon]).to be_a String
+      expect(hour).to be_a HourlyWeather
+      expect(hour.time).to be_a String
+      expect(hour.temperature).to be_a Float
+      expect(hour.conditions).to be_a String
+      expect(hour.icon).to be_a String
     end
   end
 end

@@ -8,21 +8,6 @@ class Forecast
     @hourly_weather = compile_hourly_weather(data[:hourly].first(8), data[:timezone_offset])
   end
 
-  def compile_current_weather(data, offset)
-    {
-      datetime: (Time.at(data[:dt]) + offset).to_s,
-      sunrise: (Time.at(data[:sunrise]) + offset).to_s,
-      sunset: (Time.at(data[:sunset]) + offset).to_s,
-      temperature: data[:temp],
-      feels_like: data[:feels_like],
-      humidity: data[:humidity],
-      uvi: data[:uvi],
-      visibility: data[:visibility],
-      conditions: data[:weather][0][:description],
-      icon: data[:weather][0][:icon]
-    }
-  end
-
   def compile_daily_weather(data, offset)
     data.map do |day|
       DailyWeather.new(day, offset)
@@ -31,12 +16,7 @@ class Forecast
 
   def compile_hourly_weather(data, offset)
     data.map do |hour|
-      {
-        time: Time.at(hour[:dt] + offset).strftime("%T"),
-        temperature: hour[:temp],
-        conditions: hour[:weather][0][:description],
-        icon: hour[:weather][0][:icon]
-      }
+      HourlyWeather.new(hour, offset)
     end
   end
 end

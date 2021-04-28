@@ -16,9 +16,10 @@ This project uses semantic versioning. All endpoints, for the purposes of gradin
 
 ## Endpoints
 - get '/api/v1/forecast' - Requires "location" params - Returns current weather as well as 5-day forecast and 8-hour forecast
+- get '/api/v1/backgrounds' - Requires "location params - Returns an image for use as a background
 - post '/api/v1/users' - Requires that user's email, password, and password_confirmation be sent in a JSON body - Creates a user
-- post '/api/v1/sessions - Requires a registered user's email and password be sent in a JSON body - Returns user information for login purposes
-- post '/api/v1/road_trips - Requires a user's api key, as well as the starting and ending cities, be passed in a JSON body - Creates a road trip
+- post '/api/v1/sessions' - Requires a registered user's email and password be sent in a JSON body - Returns user information for login purposes
+- post '/api/v1/road_trips' - Requires a user's api key, as well as the starting and ending cities, be passed in a JSON body - Creates a road trip
 
 ## Setup
 

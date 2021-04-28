@@ -16,8 +16,8 @@ describe Forecast, type: :class do
     expect(current.datetime).to be_a String
     expect(current.sunrise).to be_a String
     expect(current.sunset).to be_a String
-    expect(current.temperature).to be_a Float
-    expect(current.feels_like).to be_a Float
+    expect(current.temperature).to be_a Numeric
+    expect(current.feels_like).to be_a Numeric
     expect(current.humidity).to be_a Numeric
     expect(current.uvi).to be_a Numeric
     expect(current.visibility).to be_a Numeric
@@ -34,8 +34,8 @@ describe Forecast, type: :class do
       expect(day.date).to be_a String
       expect(day.sunrise).to be_a String
       expect(day.sunset).to be_a String
-      expect(day.max_temp).to be_a Float
-      expect(day.min_temp).to be_a Float
+      expect(day.max_temp).to be_a Numeric
+      expect(day.min_temp).to be_a Numeric
       expect(day.conditions).to be_a String
       expect(day.icon).to be_a String
     end
@@ -48,7 +48,7 @@ describe Forecast, type: :class do
     hourly.each do |hour|
       expect(hour).to be_a HourlyWeather
       expect(hour.time).to be_a String
-      expect(hour.temperature).to be_a Float
+      expect(hour.temperature).to be_a Numeric
       expect(hour.conditions).to be_a String
       expect(hour.icon).to be_a String
     end

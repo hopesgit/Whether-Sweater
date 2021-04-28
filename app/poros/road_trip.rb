@@ -20,6 +20,7 @@ class RoadTrip
   end
 
   def compile_weather(weather_data, time)
+    return {} if time.nil?
     index = (time/3600).to_i
     hourly = weather_data[index]
     { temperature: hourly.temperature, conditions: hourly.conditions }

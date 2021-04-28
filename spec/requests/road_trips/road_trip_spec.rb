@@ -30,5 +30,26 @@ describe 'When a post request is sent to "/api/v1/road_trip"' do
       expect(parsed[:data][:attributes][:weather_at_eta][:temperature]).to be_a Float
       expect(parsed[:data][:attributes][:weather_at_eta][:conditions]).to be_a String
     end
+
+    it 'cars dont swim', :vcr do
+      post '/api/v1/road_trip', params: {origin: "Seattle, WA", destination: "Honolulu, HI", api_key: @user.api_key}, as: :json
+
+      parsed = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:success)
+      expect(parsed).to have_key :data
+      expect(parsed[:data]).to have_key :id
+      expect(parsed[:data]).to have_key :type
+      expect(parsed[:data]).to have_key :attributes
+      expect(parsed[:data][:attributes]).to have_key :start_city
+      expect(parsed[:data][:attributes][:start_city]).to eq("Seattle, WA")
+      expect(parsed[:data][:attributes]).to have_key :end_city
+      expect(parsed[:data][:attributes][:end_city]).to eq("Honolulu, HI")
+      expect(parsed[:data][:attributes]).to have_key :travel_time
+      expect(parsed[:data][:attributes][:travel_time]).to eq("impossible route")
+      expect(parsed[:data][:attributes]).to have_key :weather_at_eta
+      expect(parsed[:data][:attributes][:weather_at_eta]).to_not have_key :temperature
+      expect(parsed[:data][:attributes][:weather_at_eta]).to_not have_key :conditions
+    end
   end
 end

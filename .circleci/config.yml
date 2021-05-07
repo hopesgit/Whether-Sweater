@@ -11,13 +11,11 @@ jobs:
       - checkout
       # - bundler-version: '2.1.4'
       - ruby/install-deps
-      - run:
-        command: rails db:setup
-        name: Database setup
-      - ruby/rspec-test
+      - run: rails db:setup
   test:
     docker:
       - image: circleci/ruby:2.5.3
+    executor: ruby/default
     steps:
       - ruby/rspec-test
 

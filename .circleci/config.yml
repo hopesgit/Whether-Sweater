@@ -5,15 +5,26 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
+      - image: circleci/ruby:2.5.3
     executor: ruby/default
     steps:
       - checkout
+      # - bundler-version: '2.1.4'
+      - ruby/install-deps
       - run:
-        command: 'gem install bundler:2.1.4'
-        name: Install appropriate bundler version
-      - ruby/bundle-install
-      - run:
-        command: 'rails db:setup'
+        command: rails db:setup
         name: Database setup
       - ruby/rspec-test
+  test:
+    docker:
+      - image: circleci/ruby:2.5.3
+    steps:
+      - ruby/rspec-test
+
+workflows:
+  version: 1
+  build_and_test:
+    jobs:
+      - build
+      - test
+        require: build

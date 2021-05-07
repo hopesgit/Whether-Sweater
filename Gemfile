@@ -11,6 +11,7 @@ gem 'figaro'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'faraday'
 gem 'bcrypt'
+gem 'rspec_junit_formatter'
 
 group :development, :test do
   gem 'pry'

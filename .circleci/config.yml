@@ -16,6 +16,8 @@ workflows:
     jobs:
       - rails/rb-deps:
           executor: ruby
+          before-steps:
+            command: 'bundle install -v 2.1.4'
       - rails/assets:
           executor: ruby
           requires:

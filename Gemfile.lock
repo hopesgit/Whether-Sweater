@@ -223,6 +223,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
+  bundler (>= 2.1.4)
   factory_bot_rails
   faker
   faraday

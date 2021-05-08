@@ -1,6 +1,3 @@
-version: 2.1
-orbs:
-  rails: medpeer/rails@1.2.0
 executors:
   ruby:
     docker:
@@ -11,6 +8,9 @@ executors:
       - image: 'circleci/postgres:13-postgis-ram'
     environment:
       DATABASE_URL: 'postgres://postgres@127.0.0.1:5432'
+orbs:
+  rails: medpeer/rails@1.2.0
+version: 2.1
 workflows:
   rspec:
     jobs:

@@ -2,6 +2,8 @@ executors:
   ruby:
     docker:
       - image: 'circleci/ruby:2.5.3'
+      environment:
+        BUNDLER_VERSION: 2.1.4
   ruby_with_db:
     docker:
       - image: 'circleci/ruby:2.5.3'
@@ -16,8 +18,6 @@ workflows:
     jobs:
       - rails/rb-deps:
           executor: ruby
-          before-steps:
-            - ruby/bundler-install
       - rails/assets:
           executor: ruby
           requires:

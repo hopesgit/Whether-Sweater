@@ -1,15 +1,59 @@
-version: 2.1
-orbs:
-  ruby: circleci/ruby@0.1.2
-
-jobs:
-  build:
+executors:
+  ruby:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
-    steps:
-      - checkout
-      - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+      - image: 'circleci/ruby:2.5.3'
+  ruby_with_db:
+    docker:
+      - image: 'circleci/ruby:2.5.3'
+      - image: 'circleci/postgres:13-postgis-ram'
+    environment:
+      DATABASE_URL: 'postgres://postgres@127.0.0.1:5432'
+orbs:
+  rails: medpeer/rails@1.2.0
+version: 2.1
+workflows:
+  rspec:
+    jobs:
+      - rails/rb-deps:
+          executor: ruby
+          steps:
+            - checkout
+            - run:
+              name: Force Bundler Version
+              command: |
+                echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+                source $BASH_ENV
+                gem install bundler:2.1.4
+      - rails/assets:
+          executor: ruby
+          requires:
+            - rails/rb-deps
+      - rails/rspec:
+          db-port: '5432'
+          executor: ruby_with_db
+          requires:
+            - rails/assets
+#   ruby: circleci/ruby@1.1.3
+#
+# jobs:
+#   build:
+#     docker:
+#       - image: circleci/ruby:2.5.3
+#     executor: ruby/default
+#     steps:
+#       - checkout
+#       - ruby/install-deps
+#       - run: rails db:setup
+#   test:
+#     docker:
+#       - image: circleci/ruby:2.5.3
+#     executor: ruby/default
+#     steps:
+#       - ruby/rspec-test
+#
+# workflows:
+#   version: 1
+#   build_and_test:
+#     jobs:
+#       - build
+#       - test

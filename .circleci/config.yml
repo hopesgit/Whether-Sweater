@@ -2,10 +2,6 @@ executors:
   ruby:
     docker:
       - image: 'circleci/ruby:2.5.3'
-      - run:
-        name: Force Bundler Version
-        command: |
-          gem install bundler
   ruby_with_db:
     docker:
       - image: 'circleci/ruby:2.5.3'
@@ -20,6 +16,14 @@ workflows:
     jobs:
       - rails/rb-deps:
           executor: ruby
+          steps:
+            - checkout
+            - run:
+              name: Force Bundler Version
+            command: |
+              echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+              source $BASH_ENV
+              gem install bundler:2.1.4
       - rails/assets:
           executor: ruby
           requires:
